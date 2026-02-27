@@ -1,0 +1,24 @@
+.sidebar{
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  padding: 1rem;
+}
+
+.logo{
+  padding: .25rem 0 1rem 0;
+  border-bottom: 1px solid #e7e7ef;
+  margin-bottom: 1rem;
+}
+
+.title{
+  display:block;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.sub{
+  display:block;
+  opacity: .65;
+  font-size: .9rem;
+}

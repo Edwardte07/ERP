@@ -2,12 +2,17 @@ import { Routes } from '@angular/router';
 import { Landing } from './pages/landing/landing';
 import { Login } from './pages/auth/login/login';
 import { Register } from './pages/auth/register/register';
-import { Dashboard } from './pages/dashboard/dashboard';
 import { authGuard } from './components/guards/auth.guard';
 
+import { Mainlayout } from './layout/mainlayout/mainlayout';
+import { Home } from './pages/home/home';
+
 export const routes: Routes = [
+
+  // Página pública inicial
   { path: '', component: Landing },
 
+  // Auth (público)
   {
     path: 'auth',
     children: [
@@ -16,7 +21,17 @@ export const routes: Routes = [
     ]
   },
 
-  { path: 'dashboard', component: Dashboard, canActivate: [authGuard] },
+  // Zona privada con layout + guard
+  {
+    path: '',
+    component: Mainlayout,
+    canActivate: [authGuard],
+    children: [
+      { path: 'home', component: Home },
+      // aquí se puede agregar más:
+      // { path: 'divisiones', component: Divisiones }
+    ]
+  },
 
   { path: '**', redirectTo: '' }
 ];

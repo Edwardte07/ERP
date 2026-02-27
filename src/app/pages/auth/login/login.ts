@@ -57,6 +57,6 @@ export class Login {
       return;
     }
 
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/home']);
   }
 }

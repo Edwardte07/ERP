@@ -13,3 +13,7 @@
 ## 3.0.0
 - Creacion de Credenciales
 - Creacion de Registro y validaciones
+
+## 4.0.0
+- Creacion de pagina home y layout
+- Creacion de componente sidebar

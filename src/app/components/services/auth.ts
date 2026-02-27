@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 type User = { username: string; email: string; password: string };
 
 @Injectable({ providedIn: 'root' })
 export class Auth {
+
   private users: User[] = [
     { username: 'Edu', email: 'edu@mail.com', password: '1234567E@' }
   ];
 
-  constructor() {
+  constructor(private router: Router) {
     const saved = localStorage.getItem('users');
     if (saved) this.users = JSON.parse(saved);
   }
@@ -19,7 +21,11 @@ export class Auth {
       (x.username.toLowerCase() === u || x.email.toLowerCase() === u) &&
       x.password === password
     );
-    if (ok) localStorage.setItem('token', 'ok');
+
+    if (ok) {
+      localStorage.setItem('token', 'ok');
+    }
+
     return ok;
   }
 
@@ -34,5 +40,6 @@ export class Auth {
 
   logout() {
     localStorage.removeItem('token');
+    this.router.navigate(['/']);
   }
 }
