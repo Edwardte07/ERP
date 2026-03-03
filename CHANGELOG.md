@@ -21,3 +21,8 @@
 ## 5.0.0
 - Creacion de paginas group y user 
 - Implementacion de botones y rutas en el sidebar
+
+## 6.0.0
+- Creacion de CRUD para pages/Group
+- Implementacion de RUD en Perfil
+

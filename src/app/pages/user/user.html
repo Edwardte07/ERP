@@ -1,55 +1,96 @@
-<p-card header="User">
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
 
-  <div class="flex align-items-center gap-3 mb-3">
+<p-card header="Perfil de Usuario">
+
+  <div class="profile-header">
     <p-avatar 
-      [label]="profile.username.charAt(0)" 
-      size="large" 
+      label="E" 
+      size="xlarge" 
       shape="circle">
     </p-avatar>
 
     <div>
-      <div class="text-xl font-bold">{{ profile.username }}</div>
-      <div class="text-sm opacity-70">{{ profile.email }}</div>
-      <div class="text-sm opacity-70">{{ profile.phone }}</div>
-      <div class="text-sm opacity-70">{{ profile.address }}</div>
-      <div class="text-sm opacity-70">{{ profile.birthdate }}</div>
+      <h2>{{ profile.username }}</h2>
+      <p>{{ profile.role }}</p>
     </div>
   </div>
 
   <p-divider></p-divider>
 
-  <div class="grid">
+  <div class="profile-info">
+    <p><strong>Email:</strong> {{ profile.email }}</p>
+    <p><strong>Teléfono:</strong> {{ profile.phone }}</p>
+    <p><strong>Dirección:</strong> {{ profile.address }}</p>
+    <p><strong>Fecha de nacimiento:</strong> {{ profile.birthdate }}</p>
+  </div>
 
-    <div class="col-12 md:col-6">
-      <b>Usuario:</b><br>
-      {{ profile.username }}
-    </div>
+  <p-divider></p-divider>
 
-    <div class="col-12 md:col-6">
-      <b>Email:</b><br>
-      {{ profile.email }}
-    </div>
+  <div class="actions">
 
-    <div class="col-12 md:col-6">
-      <b>Rol:</b><br>
-      {{ profile.role }}
-    </div>
+    <!-- EDIT -->
+    <p-button 
+      label="Editar Perfil" 
+      icon="pi pi-pencil"
+      severity="success"
+      (onClick)="openEdit()">
+    </p-button>
 
-    <div class="col-12 md:col-6">
-      <b>Teléfono:</b><br>
-     {{profile.phone}}
-    </div>
-
-    <div class="col-12 md:col-6">
-      <b>Dirección:</b><br>
-      {{profile.address}}
-    </div>
-
-    <div class="col-12 md:col-6">
-      <b>Fecha de nacimiento:</b><br>
-     {{profile.birthdate}}
-    </div>
+    <!-- DELETE -->
+    <p-button 
+      label="Eliminar Cuenta" 
+      icon="pi pi-trash"
+      severity="danger"
+      (onClick)="confirmDelete()">
+    </p-button>
 
   </div>
 
 </p-card>
+
+<!-- EDIT DIALOG -->
+<p-dialog 
+  [(visible)]="editDialog"
+  header="Editar Perfil"
+  [modal]="true"
+  [style]="{ width: '400px' }">
+
+  <div class="field">
+    <label>Nombre</label>
+    <input pInputText [(ngModel)]="tempProfile.username">
+  </div>
+
+  <div class="field">
+    <label>Email</label>
+    <input pInputText [(ngModel)]="tempProfile.email">
+  </div>
+
+  <div class="field">
+    <label>Teléfono</label>
+    <input pInputText [(ngModel)]="tempProfile.phone">
+  </div>
+
+  <div class="field">
+    <label>Dirección</label>
+    <input pInputText [(ngModel)]="tempProfile.address">
+  </div>
+
+  <ng-template pTemplate="footer">
+
+      <p-button 
+      label="Cancelar"
+      severity="secondary"
+      (onClick)="editDialog=false">
+      </p-button>
+
+    <p-button 
+      label="Guardar"
+      icon="pi pi-check"
+      severity="success"
+      (onClick)="saveProfile()">
+    </p-button>
+
+  </ng-template>
+
+</p-dialog>
