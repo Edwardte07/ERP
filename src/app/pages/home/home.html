@@ -1,3 +1,110 @@
-<p-card header="Home">
-  <p>Bienvenido al sistema !!!</p>
-</p-card>
+<div class="dashboard-container">
+  <div class="top-grid">
+    <p-card header="Resumen de Tickets">
+      <div class="summary-grid">
+        <div class="summary-item">
+          <h3>Total</h3>
+          <p-tag severity="info" [value]="totalTickets.toString()"></p-tag>
+        </div>
+
+        <div class="summary-item">
+          <h3>Pendientes</h3>
+          <p-tag severity="warning" [value]="countByStatus('Pendiente').toString()"></p-tag>
+        </div>
+
+        <div class="summary-item">
+          <h3>En progreso</h3>
+          <p-tag severity="info" [value]="countByStatus('En progreso').toString()"></p-tag>
+        </div>
+
+        <div class="summary-item">
+          <h3>Revisión</h3>
+          <p-tag severity="danger" [value]="countByStatus('Revisión').toString()"></p-tag>
+        </div>
+
+        <div class="summary-item">
+          <h3>Finalizados</h3>
+          <p-tag severity="success" [value]="countByStatus('Finalizado').toString()"></p-tag>
+        </div>
+      </div>
+    </p-card>
+
+    <p-card header="Seleccionar Grupo">
+      <div class="group-select-box">
+        <label>Grupo</label>
+        <p-dropdown
+          [options]="groups"
+          [(ngModel)]="selectedGroup"
+          optionLabel="nombre"
+          placeholder="Selecciona un grupo"
+          (onChange)="onGroupChange($event)">
+        </p-dropdown>
+      </div>
+    </p-card>
+  </div>
+
+  <p-divider></p-divider>
+
+  <p-card header="Estadísticas por Estado">
+    <div class="stats-grid">
+      <div class="stat-box">
+        <span>Pendiente</span>
+        <p-progressBar [value]="percentByStatus('Pendiente')"></p-progressBar>
+      </div>
+
+      <div class="stat-box">
+        <span>En progreso</span>
+        <p-progressBar [value]="percentByStatus('En progreso')"></p-progressBar>
+      </div>
+
+      <div class="stat-box">
+        <span>Revisión</span>
+        <p-progressBar [value]="percentByStatus('Revisión')"></p-progressBar>
+      </div>
+
+      <div class="stat-box">
+        <span>Finalizado</span>
+        <p-progressBar [value]="percentByStatus('Finalizado')"></p-progressBar>
+      </div>
+    </div>
+  </p-card>
+
+  <p-divider></p-divider>
+
+  <p-card header="Listado de Tickets">
+    <p-table [value]="filteredTickets" [paginator]="true" [rows]="5">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="titulo">Título <p-sortIcon field="titulo"></p-sortIcon></th>
+          <th pSortableColumn="estadoActual">Estado <p-sortIcon field="estadoActual"></p-sortIcon></th>
+          <th pSortableColumn="asignadoA">Asignado <p-sortIcon field="asignadoA"></p-sortIcon></th>
+          <th pSortableColumn="prioridad">Prioridad <p-sortIcon field="prioridad"></p-sortIcon></th>
+          <th pSortableColumn="fechaCreacion">Fecha creación <p-sortIcon field="fechaCreacion"></p-sortIcon></th>
+          <th pSortableColumn="fechaLimite">Fecha límite <p-sortIcon field="fechaLimite"></p-sortIcon></th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-ticket>
+        <tr>
+          <td>{{ ticket.titulo }}</td>
+          <td>
+            <p-tag [value]="ticket.estadoActual" [severity]="getSeverity(ticket.estadoActual)"></p-tag>
+          </td>
+          <td>{{ ticket.asignadoA }}</td>
+          <td>{{ ticket.prioridad }}</td>
+          <td>{{ ticket.fechaCreacion }}</td>
+          <td>{{ ticket.fechaLimite }}</td>
+          <td>
+            <p-button
+              icon="pi pi-eye"
+              severity="info"
+              [text]="true"
+              (onClick)="viewTicket(ticket.id)">
+            </p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>

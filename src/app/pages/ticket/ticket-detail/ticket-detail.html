@@ -1,0 +1,40 @@
+<div class="detail-container">
+  <p-card header="Detalle del Ticket">
+    <div class="detail-grid">
+      <div>
+        <p><strong>ID:</strong> {{ ticket.id }}</p>
+        <p><strong>Título:</strong> {{ ticket.titulo }}</p>
+        <p><strong>Descripción:</strong> {{ ticket.descripcion }}</p>
+      </div>
+
+      <div>
+        <p>
+          <strong>Estado:</strong>
+          <p-tag [value]="ticket.estadoActual" [severity]="getSeverity(ticket.estadoActual)"></p-tag>
+        </p>
+        <p><strong>Asignado a:</strong> {{ ticket.asignadoA }}</p>
+        <p><strong>Prioridad:</strong> {{ ticket.prioridad }}</p>
+        <p><strong>Fecha creación:</strong> {{ ticket.fechaCreacion }}</p>
+        <p><strong>Fecha límite:</strong> {{ ticket.fechaLimite }}</p>
+      </div>
+    </div>
+  </p-card>
+
+  <p-divider></p-divider>
+
+  <p-card header="Comentarios">
+    <ul class="simple-list">
+      <li *ngFor="let comment of ticket.comentarios">{{ comment }}</li>
+    </ul>
+  </p-card>
+
+  <p-divider></p-divider>
+
+  <p-card header="Historial de Cambios">
+    <p-timeline [value]="ticket.historialCambios">
+      <ng-template pTemplate="content" let-event>
+        <strong>{{ event.status }}</strong> - {{ event.date }}
+      </ng-template>
+    </p-timeline>
+  </p-card>
+</div>

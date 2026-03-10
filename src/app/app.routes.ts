@@ -10,12 +10,15 @@ import { Home } from './pages/home/home';
 import { Group } from './pages/group/group';
 import { User } from './pages/user/user';
 
+import { TicketDetail } from './pages/ticket/ticket-detail/ticket-detail';
+import { CreateTicket } from './pages/ticket/create-ticket/create-ticket';
+
 export const routes: Routes = [
 
   // Página pública inicial
   { path: '', component: Landing },
 
-  // Auth (público)
+  // Auth
   {
     path: 'auth',
     children: [
@@ -32,8 +35,10 @@ export const routes: Routes = [
     children: [
       { path: 'home', component: Home },
       { path: 'group', component: Group },
-      { path: 'user', component: User }
-
+      { path: 'user', component: User },
+      { path: 'group/:id', component: Group },
+      { path: 'ticket/create', component: CreateTicket },
+      { path: 'ticket/:id', component: TicketDetail },
     ]
   },
 

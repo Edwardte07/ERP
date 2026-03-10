@@ -4,11 +4,14 @@ import { RouterModule } from '@angular/router';
 
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { MenuItem } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+
+import { HasPermissionDirective } from '../../directives/has-permission.directive';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule, RouterModule, PanelMenuModule],
+  imports: [CommonModule, RouterModule, PanelMenuModule, HasPermissionDirective, ButtonModule],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css',
 })
@@ -21,35 +24,22 @@ export class Sidebar {
     },
 
     {
-      label: 'Catálogos',
-      icon: 'pi pi-database',
-      items: [
-      ],
+      label: 'Usuarios',
+      icon: 'pi pi-users',
+      routerLink: ['/']
     },
 
     {
-      label: 'Pages',
-      icon: 'pi pi-th-large',
-      items: [
-        {
-          label: 'Group',
-          icon: 'pi pi-users',
-          routerLink: ['/group'],
-        },
-        {
-          label: 'User',
-          icon: 'pi pi-user',
-          routerLink: ['/user'],
-        }
-      ],
+      label: 'Grupos',
+      icon: 'pi pi-box',
+      routerLink: ['/group']
     },
 
     {
-      label: 'Configuración',
-      icon: 'pi pi-cog',
-      items: [
-        { label: 'Perfil (demo)', icon: 'pi pi-user', routerLink: ['/home'] },
-      ],
+      label: 'Perfil',
+      icon: 'pi pi-user',
+      routerLink: ['/user']
     },
+    
   ];
 }

@@ -26,3 +26,6 @@
 - Creacion de CRUD para pages/Group
 - Implementacion de RUD en Perfil
 
+## 7.0.0
+- Creacion de Tickets y grupo
+- Recopilacion de practicas en clase

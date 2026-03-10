@@ -1,0 +1,78 @@
+<p-toast></p-toast>
+
+<p-card header="Crear Ticket">
+  <div class="form-grid">
+    <div class="field full">
+      <label>Título</label>
+      <input pInputText [(ngModel)]="ticket.titulo" />
+    </div>
+
+    <div class="field full">
+      <label>Descripción</label>
+      <textarea pInputTextarea rows="4" [(ngModel)]="ticket.descripcion"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Estado actual</label>
+      <p-dropdown
+        [options]="statusOptions"
+        [(ngModel)]="ticket.estadoActual"
+        placeholder="Selecciona estado">
+      </p-dropdown>
+    </div>
+
+    <div class="field">
+      <label>Asignado a</label>
+      <p-dropdown
+        [options]="members"
+        [(ngModel)]="ticket.asignadoA"
+        placeholder="Selecciona usuario">
+      </p-dropdown>
+    </div>
+
+    <div class="field">
+      <label>Prioridad</label>
+      <p-dropdown
+        [options]="priorityOptions"
+        [(ngModel)]="ticket.prioridad"
+        placeholder="Selecciona prioridad">
+      </p-dropdown>
+    </div>
+
+    <div class="field">
+      <label>Fecha de creación</label>
+      <p-calendar [(ngModel)]="ticket.fechaCreacion" dateFormat="yy-mm-dd"></p-calendar>
+    </div>
+
+    <div class="field">
+      <label>Fecha límite</label>
+      <p-calendar [(ngModel)]="ticket.fechaLimite" dateFormat="yy-mm-dd"></p-calendar>
+    </div>
+
+    <div class="field full">
+      <label>Comentarios</label>
+      <textarea pInputTextarea rows="3" [(ngModel)]="ticket.comentarios"></textarea>
+    </div>
+
+    <div class="field full">
+      <label>Historial de cambios</label>
+      <textarea pInputTextarea rows="3" [(ngModel)]="ticket.historialCambios"></textarea>
+    </div>
+  </div>
+
+  <div class="actions">
+    <p-button
+      label="Cancelar"
+      severity="secondary"
+      [outlined]="true"
+      routerLink="/dashboard">
+    </p-button>
+
+    <p-button
+      label="Guardar Ticket"
+      icon="pi pi-check"
+      severity="success"
+      (onClick)="saveTicket()">
+    </p-button>
+  </div>
+</p-card>
